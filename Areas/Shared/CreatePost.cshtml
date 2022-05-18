@@ -1,0 +1,78 @@
+﻿@addTagHelper "*, Microsoft.AspNetCore.Mvc.TagHelpers"
+@model ExploringCalifornia2.Models.Post
+@{
+    Layout = "/Areas/Identity/Pages/Account/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>New Post</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            background-image: url("https://www.zastavki.com/pictures/originals/2014/Backgrounds_Wallpapers_with_gradient_background_082013_.jpg");
+        }
+
+        .content {
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+        form {
+            text-align: center;
+        }
+
+        .textarea-custom {
+            resize: none;
+            margin-top: 15px;
+        }
+
+        .textarea-title {
+            resize: none;
+            margin-top: 15px;
+            height: 10px
+        }
+
+        .title-size {
+            width: 800px;
+        }
+
+        .classic-button {
+            margin-top: 15px;
+            width: 800px;
+        }
+
+        .top-header {
+            padding-top: 100px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .page_header {
+            padding-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <fieldset>
+        <div>
+            <h1 class="row top-header">Create a new Post</h1>
+        </div>
+        <form asp-action="CreatePost" asp-controller="Home">
+            <div class="content">
+                <div class="form-group shadow-textarea">
+                    <textarea class="form-control z-depth-1 textarea-title" asp-for="Title" id="exampleFormControlTextarea6" rows="3" placeholder="Blog post title"></textarea>
+                    <textarea class="form-control z-depth-1 textarea-custom" asp-for="Body" id="exampleFormControlTextarea6" rows="3" placeholder="Write something here..."></textarea>
+                    <button float="bottom" type="submit" class="classic-button btn btn-primary btn-lg">Create Post</button>
+                </div>
+            </div>
+        </form>
+    </fieldset>
+</body>
+</html>
+

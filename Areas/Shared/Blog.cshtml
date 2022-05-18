@@ -1,0 +1,91 @@
+﻿@addTagHelper "*, Microsoft.AspNetCore.Mvc.TagHelpers"
+@model IEnumerable<ExploringCalifornia2.Models.Post>
+@{
+    Layout = "/Areas/Identity/Pages/Account/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            background-image: url(@Url.Action("SetBackgroundForBlogPage", "Home"));
+            background-repeat: no-repeat;
+            background-size: cover
+        }
+
+        .post_title {
+            font-family: Calibri;
+            text-align: center;
+            font-size: 30px;
+        }
+
+        .page_header {
+            text-align: center;
+            font-family: Calibri;
+            padding-bottom: 30px;
+            padding-top: 30px;
+        }
+
+        .content {
+            margin-left: 30px;
+            margin-top: 50px;
+            font-size: 20px;
+            font-family: Calibri;
+            text-align: center;
+        }
+
+        .timestamp {
+            font-family: Calibri;
+            text-align: right;
+        }
+
+        .bck-button {
+            margin-top: 30px;
+            margin-right: 50px;
+            display: flex;
+            margin-left: auto;
+            width: 100px;
+        }
+
+        .card-params {
+            margin-top: 30px;
+            margin-left: 50px;
+            margin-right: 50px;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="page_header">Blog</h1>
+    @foreach (var post in Model)
+    {
+        <div class="d-flex flex-column bd-highlight mb-3 alert alert-primary card-params">
+            <article>
+                <div class="post_title">
+                    @post.Title
+                </div>
+                <div class="content">
+                    @post.Body
+                </div>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    if (User.Identity.Name.Equals(post.UserName))
+                    {
+                        <form asp-action="OnPostRemove" asp-controller="Home" asp-route-id="@post.Id">
+                            <button float="bottom" type="submit" class="btn btn-primary btn-lg">Remove</button>
+                        </form>
+                    }
+                }
+                <div class="timestamp">
+                    @post.DateTimeStamp
+                </div>
+            </article>
+        </div>
+    }
+</body>
+</html>

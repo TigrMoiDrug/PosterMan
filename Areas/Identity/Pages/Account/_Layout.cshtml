@@ -1,0 +1,58 @@
+﻿@using Microsoft.AspNetCore.Identity
+@addTagHelper "*, Microsoft.AspNetCore.Mvc.TagHelpers"
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+        .nav-item:hover {
+            background-color: #ddd;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <nav class="sticky-top navbar-expand-lg navbar-light bg-light" style="background-color: #e3f2fd;">
+        <ul class="navbar-nav">
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <li>
+                    <a class="nav-link text-dark">Hello, @User.Identity.Name.Split("@")[0]!</a>
+                </li>
+                <li class="nav-item">
+                    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                        <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                    </form>
+                </li>
+            }
+            else
+            {
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                </li>
+            }
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="@Url.Action("Back", "Home")">Home</a>
+            </li>
+    </ul>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; 2022 - Poster App</p>
+        </footer>
+    </div>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
